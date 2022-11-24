@@ -1,0 +1,73 @@
+---
+title: "Workbench Architectures"
+---
+
+
+### Here's a really wide mermaid diagram!
+
+How can we get this puppy to respond to min-width and max-width?
+
+And bonus, can we use lightbox with this?
+
+
+:::{.column-page-inset-right}
+```{mermaid}
+flowchart LR
+u1(User)
+u2(User)
+u3(User)
+b1(Browser)
+b2(Browser)
+b3(Browser)
+workbench1(Workbench)
+workbench2(Workbench)
+session(RStudio Session)
+jupyter(Jupyter Session)
+vscode(VS Code Session)
+job(Workbench Job)
+lb(Load Balancer)
+nfs(Shared Storage)
+pg(Postgres)
+
+u1---b1
+u2---b2
+u3---b3
+b1---lb
+b2---lb
+b3---lb
+lb---workbench1
+lb---workbench2
+server1-.-nfs
+server2-.-nfs
+server1-.-pg
+server2-.-pg
+
+
+subgraph server1 [Linux Server]
+    workbench1---jupyter
+    workbench1---job
+end
+
+subgraph server2 [Linux Server]
+    workbench2---session
+    workbench2---vscode
+end
+
+workbench1-.-workbench2
+
+classDef server fill:#FAEEE9,stroke:#ab4d26
+classDef product fill:#447099,stroke:#213D4F,color:#F2F2F2
+classDef session fill:#7494B1,color:#F2F2F2,stroke:#213D4F
+classDef element fill:#C2C2C4,stroke:#213D4F
+classDef req fill:#72994E,stroke:#1F4F4F
+
+class server1,server2 server
+class workbench1,workbench2 product
+class session,jupyter,vscode,job session
+class u1,u2,u3,b1,b2,b3,lb element
+class pg,nfs req
+
+```
+:::    
+
+
